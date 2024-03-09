@@ -1,0 +1,108 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  email       String        @id @db.VarChar(255)
+  nama        String        @db.VarChar(255)
+  password    String        @db.VarChar(255)
+  token       String?       @db.VarChar(255)
+  skill       Skill[]
+  pengalaman  Pengalaman[]
+  project     Project[]
+  socialmedia SocialMedia[]
+  profile     Profile[]
+  created_at  DateTime      @default(now())
+  updated_at  DateTime      @updatedAt
+
+  @@map("users")
+}
+
+model Skill {
+  id         Int      @id @default(autoincrement())
+  nama       String   @db.VarChar(255)
+  logo       String   @db.VarChar(255)
+  dev        String   @db.VarChar(255)
+  user       User     @relation(fields: [dev], references: [email])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("skills")
+}
+
+model Pengalaman {
+  id         Int      @id @default(autoincrement())
+  nama       String   @db.VarChar(255)
+  bagian     String   @db.VarChar(255)
+  tahun      Int      @db.Int()
+  ulasan     String   @db.VarChar(255)
+  dev        String   @db.VarChar(255)
+  user       User     @relation(fields: [dev], references: [email])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("pengalamans")
+}
+
+model Project {
+  id         Int      @id @default(autoincrement())
+  photo      String?  @db.VarChar(255)
+  nama       String   @db.VarChar(100)
+  role       String   @db.VarChar(100)
+  ulasan     String   @db.VarChar(255)
+  link       String?  @db.VarChar(300)
+  dev        String   @db.VarChar(255)
+  user       User     @relation(fields: [dev], references: [email])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("projects")
+}
+
+model Contact {
+  id         Int      @id @default(autoincrement())
+  nama       String   @db.VarChar(255)
+  email      String   @db.VarChar(255)
+  number     String   @db.VarChar(20)
+  ulasan     String   @db.VarChar(1500)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("contacts")
+}
+
+model SocialMedia {
+  id         Int      @id @default(autoincrement())
+  nama       String   @db.VarChar(100)
+  link       String   @db.VarChar(100)
+  icon       String?  @db.VarChar(100)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  dev        String   @db.VarChar(255)
+  user       User     @relation(fields: [dev], references: [email])
+
+  @@map("socials")
+}
+
+model Profile {
+  id         Int       @id @default(autoincrement())
+  nama       String    @db.VarChar(255)
+  divisi     String    @db.VarChar(255)
+  tentang    String?   @db.VarChar(1500)
+  photo      String?   @db.VarChar(255)
+  cv         String?   @db.VarChar(255)
+  dev        String    @db.VarChar(255)
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
+  user       User      @relation(fields: [dev], references: [email])
+
+  @@map("profiles")
+}

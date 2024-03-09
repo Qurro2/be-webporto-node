@@ -1,0 +1,71 @@
+POST http://localhost:3000/user/register
+Content-Type: application/json
+Accept: application/json 
+
+{
+    "email" : "mantap@gmail.com",
+    "password" : "mantap",
+    "nama" : "mantap banget"
+}
+
+###
+
+POST http://localhost:3000/user/login
+Content-Type: application/json
+Accept: application/json 
+
+{
+    "email" : "kuriayun@gmail.com",
+    "password" : "rahasia"
+}
+
+###
+
+GET http://localhost:3000/dev/current
+Content-Type: application/json
+Accept: application/json
+Authorization: 1656b000-0d74-4b8f-9f5c-5f9d9a4705d0
+
+###
+
+PATCH http://localhost:3000/dev/current/update
+Content-Type: application/json
+Accept: application/json
+Authorization: 1656b000-0d74-4b8f-9f5c-5f9d9a4705d0
+
+{
+    "nama" : "Qurrota Ayun",
+    "password" : "rahasia"
+}
+
+###
+DELETE http://localhost:3000/dev/logout
+Content-Type: application/json
+Accept: application/json
+Authorization: 8e1cb03c-9c94-4b6f-9286-ac6300841435
+
+###
+
+POST http://localhost:3000/dev/skill/create
+Content-Type: application/json
+Accept: application/json 
+Authorization: afeb4588-dc31-47d7-a0fc-5ba1e4eebea0
+
+{
+    "nama" : "mantap banget",
+    "logo" : "GG"
+}
+
+###
+PUT http://localhost:3000/dev/pengalaman/update/1
+Content-Type: application/x-www-form-urlencoded
+Authorization: 736e96e8-7352-4393-85a1-b0cd5f1300d4
+Accept: application/x-www-form-urlencoded
+
+{
+    "id" : 1,
+    "nama" : "test update",
+    "bagian" : "test Update juga",
+    "tahun" : 2024,
+    "ulasan" : "Ulasan di update done"
+}

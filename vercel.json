@@ -1,0 +1,23 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "prisma generate && npm run build",
+            "use": "@vercel/node"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/",
+            "dest": "src/application/web.js"
+        },
+        {
+            "src": "/public-api/.*",
+            "dest": "src/routes/public-api.js"
+        },
+        {
+            "src": "/dev-api/.*",
+            "dest": "src/routes/dev-api.js"
+        }
+    ]
+}
